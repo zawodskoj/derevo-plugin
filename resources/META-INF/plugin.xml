@@ -1,0 +1,19 @@
+<idea-plugin>
+    <id>vendi.ploogin</id>
+    <name>Derevo Implicits Injector</name>
+    <version>0.0.1-SNAPSHOT</version>
+    <vendor>zawodskoj</vendor>
+
+    <description>Plugin for Derevo library</description>
+
+    <idea-version since-build="211.0"/>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.properties</depends>
+    <depends>org.intellij.scala</depends>
+
+    <extensions defaultExtensionNs="org.intellij.scala">
+        <syntheticMemberInjector implementation="pw.muffet.things.derevo.DerevoInjector"/>
+    </extensions>
+
+</idea-plugin>
