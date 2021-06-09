@@ -1,15 +1,16 @@
 <idea-plugin>
-    <id>vendi.ploogin</id>
+    <id>pw.muffet.things.derevo</id>
     <name>Derevo Implicits Injector</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <vendor>zawodskoj</vendor>
 
     <description>Plugin for Derevo library</description>
 
-    <idea-version since-build="211.0"/>
+    <idea-version since-build="203.0"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.properties</depends>
+    <depends>com.intellij.modules.java</depends>
     <depends>org.intellij.scala</depends>
 
     <extensions defaultExtensionNs="org.intellij.scala">

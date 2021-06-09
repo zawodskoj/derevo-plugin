@@ -9,13 +9,15 @@ import org.jetbrains.plugins.scala.lang.psi.types.{ScType, ScParameterizedType}
 
 class DerevoInjector extends SyntheticMembersInjector {
   def extractTypeclassTpe(derivationObjectTpe: ScType): Option[ScTypeDefinition] =
-    derivationObjectTpe.parents.collect { case s: ScParameterizedType => s }
-      .map(s => s.extractDesignated(true) -> s.typeArguments)
-      .collectFirst {
-        case (Some(t: ScTrait), Seq(typearg)) if t.qualifiedName == "derevo.Derivation" => typearg.extractDesignated(true)
-        case (Some(t: ScTrait), Seq(_, typearg, _)) if t.qualifiedName == "derevo.SpecificDerivation" => typearg.extractDesignated(true)
-      }
-      .collectFirst { case Some(designated: ScTypeDefinition) => designated }
+    derivationObjectTpe.extractDesignated(true).collect { case d: ScObject => d }.flatMap { designatedObject =>
+      designatedObject.extendsBlock.superTypes.collect { case s: ScParameterizedType => s }
+        .map(s => s.extractDesignated(true) -> s.typeArguments)
+        .collectFirst {
+          case (Some(t: ScTrait), Seq(typearg)) if t.qualifiedName == "derevo.Derivation" => typearg.extractDesignated(true)
+          case (Some(t: ScTrait), Seq(_, typearg, _)) if t.qualifiedName == "derevo.SpecificDerivation" => typearg.extractDesignated(true)
+        }
+        .collectFirst { case Some(designated: ScTypeDefinition) => designated }
+    }
 
   def extractTypeclassTpeFromShape(expr: ScExpression): Option[ScTypeDefinition] = expr match {
     case r: ScReferenceExpression =>
