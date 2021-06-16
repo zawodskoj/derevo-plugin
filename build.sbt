@@ -8,6 +8,7 @@ lazy val plugin =
       scalaVersion := "2.13.2",
       ThisBuild / intellijPluginName := "Derevo Implicits Injector",
       ThisBuild / intellijBuild      := "203.7717.56",
+      // ThisBuild / intellijBuild      := "211.7442.40",
       ThisBuild / intellijPlatform   := IntelliJPlatform.IdeaCommunity,
       Global    / intellijAttachSources := true,
       Compile / javacOptions ++= "--release" :: "11" :: Nil,
